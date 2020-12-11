@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.label {
+  margin-bottom: 5px;
+}
+
+.input:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.input {
+  max-width: 100%;
+  width: 300px;
+  height: 30px;
+}

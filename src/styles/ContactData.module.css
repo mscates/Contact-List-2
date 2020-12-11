@@ -1,0 +1,36 @@
+.tableRow {
+  display: table-row;
+}
+
+.tableCell {
+  display: table-cell;
+  padding: 1em;
+  border-bottom: #f0f0f0 1px solid;
+  width: 20%;
+}
+
+.tableCellButton {
+  display: table-cell;
+  width: 10%;
+}
+
+.tableCellButton button {
+  padding: 1.8em;
+  margin-left: 5px;
+  border: none;
+}
+
+.tableCellButtonUpdate {
+  background: #f0ad4e;
+}
+.tableCellButtonDelete {
+  background: #d9534f;
+}
+.tableCellButtonUpdate:hover {
+  color: #fff;
+  cursor: pointer;
+}
+.tableCellButtonDelete:hover {
+  color: #fff;
+  cursor: pointer;
+}
