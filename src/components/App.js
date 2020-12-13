@@ -1,8 +1,10 @@
 import React, { Component } from "react"
+
+import { Route, Switch } from "react-router-dom"
+import UpdateContactForm from "../components/forms/UpdateContactForm"
+import Home from "./Home"
 import Header from "./Header"
-import ContactItemsHeader from "./ContactItemsHeader"
-import AddContactModal from "./modals/AddContactModal"
-import UpdateContactModal from "./modals/UpdateContactModal"
+import AddContactForm from "../components/forms/AddContactForm"
 
 class App extends Component {
   state = {
@@ -15,21 +17,7 @@ class App extends Component {
         id: 1,
       },
     ],
-    showAddModal: false,
-    showUpdateModal: false,
     contactToUpdate: {},
-  }
-
-  showAddContactModal = () => {
-    this.setState({ showAddModal: true })
-  }
-
-  closeAddContactModal = () => {
-    this.setState({ showAddModal: false })
-  }
-
-  closeUpdateModal = () => {
-    this.setState({ showUpdateModal: false })
   }
 
   handleUpdateContact = (id) => {
@@ -67,31 +55,20 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header handleClick={this.showAddContactModal} />
-        <div>
-          {this.state.showAddModal && (
-            <AddContactModal
-              closeModal={this.closeAddContactModal}
-              handleSubmit={this.handleSubmit}
-              showAddModal={this.state.showAddModal}
-            />
-          )}
-        </div>
-        <div>
-          {this.state.showUpdateModal && (
-            <UpdateContactModal
-              data={this.state.contactToUpdate}
-              closeModal={this.closeUpdateModal}
-              handleSubmit={this.handleUpdateSubmit}
-              showUpdateModal={this.state.showUpdateModal}
-            />
-          )}
-        </div>
-        <ContactItemsHeader
-          removeContact={this.handleDeleteContact}
-          updateContact={this.handleUpdateContact}
-          data={this.state.contacts}
-        />
+        <Header />
+        <Switch>
+          <Route
+            path="/"
+            exact
+            render={() => <Home data={this.state.contacts} />}
+          />
+          <Route
+            path="/add"
+            component={AddContactForm}
+            handleSubmit={this.handleSubmit}
+          />
+          <Route path="/update" component={UpdateContactForm} />
+        </Switch>
       </div>
     )
   }

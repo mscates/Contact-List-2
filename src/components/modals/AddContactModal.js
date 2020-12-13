@@ -16,7 +16,7 @@ const AddContactModal = (props) => {
           <div onClick={props.closeModal} className={styles.closeButton}>
             X
           </div>
-          <AddContactForm handleSubmit={props.handleSubmit} />
+          <AddContactForm />
         </div>
       </div>
     </React.Fragment>

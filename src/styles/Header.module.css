@@ -4,5 +4,12 @@
 }
 
 .btnStyles {
-  background: red;
+  background: #6495ed;
+  text-decoration: none;
+  padding: 10px 15px;
+  color: #000;
+  cursor: pointer;
+}
+.btnStyles:hover {
+  color: #fff;
 }

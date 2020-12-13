@@ -1,16 +1,14 @@
 import React from "react"
 import styles from "../styles/Header.module.css"
-import Button from "./Button"
+import { Link } from "react-router-dom"
 
 const Header = (props) => {
   return (
     <div className={styles.container}>
       <h1>Basic Contact List</h1>
-      <Button
-        className={styles.addContactBtn}
-        handleClick={props.handleClick}
-        label="Add Contact"
-      ></Button>
+      <Link to="/add" className={styles.btnStyles}>
+        Add Contact
+      </Link>
     </div>
   )
 }

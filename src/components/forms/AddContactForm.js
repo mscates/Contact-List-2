@@ -1,8 +1,6 @@
 import React, { Component } from "react"
 import styles from "../../styles/AddContactForm.module.css"
 import uuid from "react-uuid"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCheckCircle, faTimesCircle } from "@fortawesome/free-solid-svg-icons"
 
 class AddContactForm extends Component {
   initialState = {
@@ -11,17 +9,18 @@ class AddContactForm extends Component {
     email: "",
     phone: "",
     id: uuid(),
-    firstNameIcon: faTimesCircle,
-    lastNameIcon: faTimesCircle,
-    emailIcon: faTimesCircle,
-    phoneIcon: faTimesCircle,
-    inputFocus: false,
+    errors: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+    },
   }
 
   state = this.initialState
 
   handleFormReset = () => {
-    this.setState(() => this.initialState)
+    this.setState({ ...this.initialState, id: uuid() })
   }
 
   handleChange = (e) => {
@@ -33,56 +32,47 @@ class AddContactForm extends Component {
     })
   }
 
-  handleIsNameValid = (value) => {
-    if (value.length < 3) {
-      console.log("must have at least 2 characters")
+  handleSubmit = (e) => {
+    e.preventDefault()
+    if (this.validateForm(this.state.errors)) {
+      console.log("valid Form")
     } else {
-      console.log("good")
+      console.log("invalid form")
     }
+  }
+
+  validateForm = (errors) => {
+    let valid = true
+    Object.values(errors).forEach((val) => val.length > 0 && (valid = false))
+    return valid
   }
 
   handleInputFocus = () => {
     this.setState({ inputFocus: true })
   }
 
-  handleFirstNameIcon = (value) => {
-    const iconToShow = value.length < 2 ? faTimesCircle : faCheckCircle
-    this.setState({ firstNameIcon: iconToShow })
-  }
-  handleLastNameIcon = (value) => {
-    const iconToShow = value.length < 2 ? faTimesCircle : faCheckCircle
-    this.setState({ lastNameIcon: iconToShow })
-  }
-
-  handleEmailIcon = (value) => {
-    let emailRegex = /\S+@\S+\.\S+/
-    const iconToShow = emailRegex.test(value) ? faCheckCircle : faTimesCircle
-    this.setState({ emailIcon: iconToShow })
-  }
-  handlePhoneIcon = (value) => {
-    const iconToShow = value.length === 10 ? faCheckCircle : faTimesCircle
-    this.setState({ phoneIcon: iconToShow })
-  }
-
   handleValidation = (name, value) => {
+    let errors = this.state.errors
     switch (name) {
       case "firstName":
-        this.handleIsNameValid(value)
-        this.handleFirstNameIcon(value)
+        errors.firstName =
+          value.length < 2 ? "First Name must be at least 2 characters" : ""
         break
       case "lastName":
-        this.handleIsNameValid(value)
-        this.handleLastNameIcon(value)
+        errors.lastName =
+          value.length < 2 ? "First Name must be at least 2 characters" : ""
         break
       case "email":
-        this.handleEmailIcon(value)
+        const emailRegex = /\S+@\S+\.\S+/
+        errors.email = emailRegex.test(value) ? "" : "Email is not valid"
         break
       case "phone":
-        this.handlePhoneIcon(value)
+        errors.phone = value.length === 10 ? "" : "Phone is not valid"
         break
       default:
-        console.log("all is good")
+        break
     }
+    this.setState({ errors, [name]: value }, () => {})
   }
 
   submitAddContactForm = (e) => {
@@ -92,7 +82,7 @@ class AddContactForm extends Component {
   }
 
   render() {
-    const { firstName, lastName, email, phone } = this.state
+    const { firstName, lastName, email, phone, errors } = this.state
     return (
       <form className={styles.container}>
         <div className={styles.inputContainer}>
@@ -100,23 +90,8 @@ class AddContactForm extends Component {
             <label className={styles.label} htmlFor="firstName">
               First Name
             </label>
-
-            <div>
-              {this.state.inputFocus ? (
-                <FontAwesomeIcon
-                  icon={this.state.firstNameIcon}
-                  className={[
-                    styles.circle,
-                    this.state.firstNameIcon === faTimesCircle
-                      ? styles.timesCircle
-                      : styles.checkCircle,
-                  ].join(" ")}
-                />
-              ) : null}
-            </div>
           </div>
           <input
-            onFocus={this.handleInputFocus}
             className={styles.input}
             type="text"
             name="firstName"
@@ -130,22 +105,8 @@ class AddContactForm extends Component {
             <label className={styles.label} htmlFor="lastName">
               Last Name
             </label>
-            <div>
-              {this.state.inputFocus ? (
-                <FontAwesomeIcon
-                  icon={this.state.lastNameIcon}
-                  className={[
-                    styles.circle,
-                    this.state.lastNameIcon === faTimesCircle
-                      ? styles.timesCircle
-                      : styles.checkCircle,
-                  ].join(" ")}
-                />
-              ) : null}
-            </div>
           </div>
           <input
-            onFocus={this.handleInputFocus}
             className={styles.input}
             type="text"
             name="lastName"
@@ -159,22 +120,8 @@ class AddContactForm extends Component {
             <label className={styles.label} htmlFor="email">
               Email
             </label>
-            <div>
-              {this.state.inputFocus ? (
-                <FontAwesomeIcon
-                  icon={this.state.emailIcon}
-                  className={[
-                    styles.circle,
-                    this.state.emailIcon === faTimesCircle
-                      ? styles.timesCircle
-                      : styles.checkCircle,
-                  ].join(" ")}
-                />
-              ) : null}
-            </div>
           </div>
           <input
-            onFocus={this.handleInputFocus}
             className={styles.input}
             type="text"
             name="email"
@@ -188,22 +135,8 @@ class AddContactForm extends Component {
             <label className={styles.label} htmlFor="phone">
               Phone
             </label>
-            <div>
-              {this.state.inputFocus ? (
-                <FontAwesomeIcon
-                  icon={this.state.phoneIcon}
-                  className={[
-                    styles.circle,
-                    this.state.phoneIcon === faTimesCircle
-                      ? styles.timesCircle
-                      : styles.checkCircle,
-                  ].join(" ")}
-                />
-              ) : null}
-            </div>
           </div>
           <input
-            onFocus={this.handleInputFocus}
             className={styles.input}
             type="tel"
             name="phone"
@@ -212,10 +145,7 @@ class AddContactForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button
-          className={styles.submitAddContact}
-          onClick={this.submitAddContactForm}
-        >
+        <button className={styles.submitAddContact} onClick={this.handleSubmit}>
           Submit
         </button>
       </form>
