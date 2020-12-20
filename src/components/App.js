@@ -68,7 +68,7 @@ class App extends Component {
             component={AddContactForm}
             handleSubmit={this.handleSubmit}
           />
-          <Route path="/update" component={UpdateContactForm} />
+          <Route path="/update" exact component={UpdateContactForm} />
         </Switch>
       </div>
     )
