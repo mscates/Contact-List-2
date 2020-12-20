@@ -64,6 +64,7 @@ class App extends Component {
           />
           <Route
             path="/add"
+            exact
             component={AddContactForm}
             handleSubmit={this.handleSubmit}
           />
