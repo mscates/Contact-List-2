@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import styles from "../../styles/AddContactForm.module.css"
 import uuid from "react-uuid"
-
 class AddContactForm extends Component {
   initialState = {
     firstName: "",
@@ -16,6 +15,7 @@ class AddContactForm extends Component {
       phone: "",
     },
   }
+  
 
   state = this.initialState
 
@@ -30,15 +30,6 @@ class AddContactForm extends Component {
     this.setState({
       [name]: value,
     })
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault()
-    if (this.validateForm(this.state.errors)) {
-      console.log("valid Form")
-    } else {
-      console.log("invalid form")
-    }
   }
 
   validateForm = (errors) => {
@@ -82,13 +73,14 @@ class AddContactForm extends Component {
   }
 
   render() {
+   
     const { firstName, lastName, email, phone, errors } = this.state
     return (
       <form className={styles.container}>
         <div className={styles.inputContainer}>
           <div className={styles.labelContainer}>
             <label className={styles.label} htmlFor="firstName">
-              First Name
+          First Name
             </label>
           </div>
           <input
@@ -145,12 +137,14 @@ class AddContactForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button className={styles.submitAddContact} onClick={this.handleSubmit}>
+        <button className={styles.submitAddContact} onClick={this.submitAddContactForm}>
           Submit
         </button>
       </form>
     )
   }
 }
+
+
 
 export default AddContactForm

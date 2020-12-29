@@ -1,15 +1,11 @@
 import React from "react"
 import ContactItemsHeader from "./ContactItemsHeader"
 
-const Home = (props) => {
+const Home = () => {
   return (
     <div>
      
-      <ContactItemsHeader
-        removeContact={props.handleDeleteContact}
-        updateContact={props.handleUpdateContact}
-        data={props.data}
-      />
+      <ContactItemsHeader />
     </div>
   )
 }

@@ -2,7 +2,8 @@ import React from "react"
 import ContactData from "./ContactData"
 import styles from "../styles/ContactItemsHeader.module.css"
 
-const ContactItemsHeader = (props) => {
+
+const ContactItemsHeader = () => {
   return (
     <div className={styles.table}>
       <div className={styles.tableRow}>
@@ -11,11 +12,7 @@ const ContactItemsHeader = (props) => {
         <div className={styles.tableHeader}>Email</div>
         <div className={styles.tableHeader}>Phone</div>
       </div>
-      <ContactData
-        removeContact={props.removeContact}
-        updateContact={props.updateContact}
-        data={props.data}
-      />
+      <ContactData />
     </div>
   )
 }

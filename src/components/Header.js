@@ -2,7 +2,7 @@ import React from "react"
 import styles from "../styles/Header.module.css"
 import { Link } from "react-router-dom"
 
-const Header = (props) => {
+const Header = () => {
   return (
     <div className={styles.container}>
       <h1>Basic Contact List</h1>
