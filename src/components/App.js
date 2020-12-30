@@ -47,12 +47,6 @@ class App extends Component {
     })
   }
 
-  handleDeleteContact = (id) => {
-    const filteredContacts = this.state.contacts.filter(
-      (item) => id !== item.id
-    )
-    this.setState({ contacts: filteredContacts })
-  }
 
   render() {
     return (
@@ -82,7 +76,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  contactAdded: contact => dispatch(contactAdded(contact))
+  contactAdded: contact => dispatch(contactAdded(contact)),
+  contactRemoved: id => dispatch(contactRemoved(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

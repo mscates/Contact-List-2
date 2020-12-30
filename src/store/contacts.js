@@ -17,7 +17,7 @@ const slice = createSlice({
       })
     },
     contactRemoved: (contacts, action) => {
-      return contacts.filter(contact => contact.id !== action.payload.id)
+      return contacts.filter(contact => console.log(contact.id !== action.payload.id))
     }
   }
 })
