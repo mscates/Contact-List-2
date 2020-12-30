@@ -1,8 +1,10 @@
 import React from "react"
 import styles from "../styles/ContactData.module.css"
 import { useSelector } from 'react-redux'
+import { contactRemoved } from '../store/contacts'
+import { connect } from 'react-redux'
 
-const ContactData = () => {
+const ContactData = ({ dispatch }) => {
   const data = useSelector(state => state)
   console.log(data)
   const contacts = data.map((item) => (
@@ -11,9 +13,9 @@ const ContactData = () => {
       <div className={styles.tableCell}>{item.lastName}</div>
       <div className={styles.tableCell}>{item.email}</div>
       <div className={styles.tableCell}>{item.phone}</div>
-      {/* <div className={styles.tableCellButton}>
+      <div className={styles.tableCellButton}>
         <button
-          onClick={() => props.updateContact(item.id)}
+          // onClick={() => props.updateContact(item.id)}
           className={styles.tableCellButtonUpdate}
         >
           Update
@@ -22,15 +24,20 @@ const ContactData = () => {
       <div className={styles.tableCellButton}>
         <button
           className={styles.tableCellButtonDelete}
-          onClick={() => props.removeContact(item.id)}
+          onClick={() => dispatch(contactRemoved(item.id))}
         >
           Delete
         </button>
-      </div> */}
+      </div>
     </div>
   ))
 
   return <React.Fragment>{contacts}</React.Fragment>
 }
 
-export default ContactData
+const mapStateToProps = state => ({
+  contacts: state.contacts
+})
+
+export default connect(mapStateToProps)(ContactData)
+
