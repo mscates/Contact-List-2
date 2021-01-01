@@ -4,7 +4,6 @@ import ContactItemsHeader from "./ContactItemsHeader"
 const Home = () => {
   return (
     <div>
-     
       <ContactItemsHeader />
     </div>
   )

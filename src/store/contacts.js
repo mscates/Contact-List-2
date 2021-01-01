@@ -7,7 +7,7 @@ const slice = createSlice({
   initialState: [],
   reducers: {
     contactAdded: (contacts, action) => {
-      console.log(action)
+      console.log(action.payload)
       contacts.push({
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
@@ -18,11 +18,23 @@ const slice = createSlice({
     },
     contactRemoved: (contacts, action) => {
       return contacts.filter(contact => console.log(contact.id !== action.payload.id))
+    },
+    contactUpdated: (contacts, action) => {
+      const index = contacts.findIndex(contact => contact.id === action.payload.id)
+      contacts[index] = {
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        email: action.payload.email,
+        phone: action.payload.phone,
+        id: action.payload.id
+
+      }
+
     }
   }
 })
 
-export const { contactAdded, contactRemoved } = slice.actions
+export const { contactAdded, contactRemoved, contactUpdated } = slice.actions
 export default slice.reducer
 // Action types
 // with redux toolkit we don't need these constants

@@ -3,11 +3,11 @@ import styles from "../../styles/UpdateContactForm.module.css"
 
 class UpdateContactForm extends Component {
   state = {
-    firstName: this.props.contactToUpdate.firstName,
-    lastName: this.props.contactToUpdate.lastName,
-    email: this.props.contactToUpdate.email,
-    phone: this.props.contactToUpdate.phone,
-    id: this.props.contactToUpdate.id,
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    id: '',
   }
 
   handleChange = (e) => {

@@ -3,10 +3,10 @@ import styles from "../styles/ContactData.module.css"
 import { useSelector } from 'react-redux'
 import { contactRemoved } from '../store/contacts'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const ContactData = ({ dispatch }) => {
   const data = useSelector(state => state)
-  console.log(data)
   const contacts = data.map((item) => (
     <div className={styles.tableRow} key={item.id}>
       <div className={styles.tableCell}>{item.firstName}</div>
@@ -14,12 +14,12 @@ const ContactData = ({ dispatch }) => {
       <div className={styles.tableCell}>{item.email}</div>
       <div className={styles.tableCell}>{item.phone}</div>
       <div className={styles.tableCellButton}>
-        <button
-          // onClick={() => props.updateContact(item.id)}
+        <Link
+          to="/update"
           className={styles.tableCellButtonUpdate}
         >
           Update
-        </button>
+        </Link>
       </div>
       <div className={styles.tableCellButton}>
         <button

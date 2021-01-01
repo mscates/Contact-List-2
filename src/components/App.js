@@ -22,31 +22,22 @@ class App extends Component {
     contactToUpdate: {},
   }
 
-  handleUpdateContact = (id) => {
-    const itemToUpdate = this.state.contacts.find((item) => id === item.id)
-    this.setState({ showUpdateModal: true, contactToUpdate: itemToUpdate })
-  }
+ 
 
   handleSubmit = (contact) => {
     this.props.contactAdded(contact)
   }
 
-  handleUpdateSubmit = (contact) => {
-    this.setState((prevState) => {
-      const updatedContacts = prevState.contacts.map((item) => {
-        if (item.id === contact.id) {
-          return {
-            ...contact,
-          }
-        }
-        return item
-      })
-      return {
-        contacts: updatedContacts,
-      }
-    })
+  handleUpdateSubmit = () => {
+    console.log('hello')
   }
 
+  handleDeleteContact = (id) => {
+    const filteredContacts = this.state.contacts.filter(
+      (item) => id !== item.id
+    )
+    this.setState({ contacts: filteredContacts })
+  }
 
   render() {
     return (
@@ -63,7 +54,7 @@ class App extends Component {
             exact
             component={() => <AddContactForm handleSubmit={this.handleSubmit}/>}
           />
-          <Route path="/update" exact component={UpdateContactForm} />
+          <Route path="/update" exact component={() => <UpdateContactForm handleUpdateSubmit={this.handleUpdateSubmit}/>}/>
         </Switch>
       </div>
       
@@ -73,11 +64,11 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   contacts: state.contacts
+  
 })
 
 const mapDispatchToProps = dispatch => ({
-  contactAdded: contact => dispatch(contactAdded(contact)),
-  contactRemoved: id => dispatch(contactRemoved(id))
+  contactAdded: contact => dispatch(contactAdded(contact))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
