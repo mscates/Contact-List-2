@@ -1,13 +1,14 @@
 import React, { Component } from "react"
 import styles from "../../styles/AddContactForm.module.css"
-import uuid from "react-uuid"
+import { connect } from 'react-redux'
+import { contactAdded } from '../../store/contacts'
 class AddContactForm extends Component {
   initialState = {
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
-    id: uuid(),
+    id: '',
     errors: {
       firstName: "",
       lastName: "",
@@ -20,7 +21,7 @@ class AddContactForm extends Component {
   state = this.initialState
 
   handleFormReset = () => {
-    this.setState({ ...this.initialState, id: uuid() })
+    this.setState({ ...this.initialState, id: '' })
   }
 
   handleChange = (e) => {
@@ -68,7 +69,7 @@ class AddContactForm extends Component {
 
   submitAddContactForm = (e) => {
     e.preventDefault()
-    this.props.handleSubmit(this.state)
+    this.props.contactAdded(this.state)
     this.handleFormReset()
   }
 
@@ -145,6 +146,14 @@ class AddContactForm extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  contacts: state.contacts
+  
+})
 
+const mapDispatchToProps = dispatch => ({
+  contactAdded: contact => dispatch(contactAdded(contact))
+})
 
-export default AddContactForm
+export default connect(mapStateToProps, mapDispatchToProps)(AddContactForm)
+

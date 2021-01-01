@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 
 const ContactData = ({ dispatch }) => {
   const data = useSelector(state => state)
+
   const contacts = data.map((item) => (
     <div className={styles.tableRow} key={item.id}>
       <div className={styles.tableCell}>{item.firstName}</div>
