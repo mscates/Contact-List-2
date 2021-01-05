@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import styles from "../../styles/AddContactForm.module.css"
 import { connect } from 'react-redux'
 import { contactAdded } from '../../store/contacts'
+import { Link, withRouter } from 'react-router-dom'
+
 class AddContactForm extends Component {
   initialState = {
     firstName: "",
@@ -71,6 +73,7 @@ class AddContactForm extends Component {
     e.preventDefault()
     this.props.contactAdded(this.state)
     this.handleFormReset()
+    this.props.history.push('/')
   }
 
   render() {
@@ -138,9 +141,9 @@ class AddContactForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button className={styles.submitAddContact} onClick={this.submitAddContactForm}>
+        <Link className={styles.submitAddContact} onClick={this.submitAddContactForm}>
           Submit
-        </button>
+        </Link>
       </form>
     )
   }

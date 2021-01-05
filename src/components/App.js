@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 
 const App =() => {
     const data = useSelector(state => state)
+
     return (
       <div>
         <Header />
@@ -23,7 +24,7 @@ const App =() => {
             exact
             component={AddContactForm}
           />
-          <Route path="/update" exact component={UpdateContactForm}/>
+          <Route path="/update/:id" exact component={UpdateContactForm}/>
         </Switch>
       </div>
       

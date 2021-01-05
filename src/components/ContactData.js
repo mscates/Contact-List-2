@@ -8,6 +8,11 @@ import { Link } from 'react-router-dom'
 const ContactData = ({ dispatch }) => {
   const data = useSelector(state => state)
 
+  const findContact = (id) => {
+    const newContact = data.find(item => item.id === id)
+    return newContact
+  }
+
   const contacts = data.map((item) => (
     <div className={styles.tableRow} key={item.id}>
       <div className={styles.tableCell}>{item.firstName}</div>
@@ -15,8 +20,10 @@ const ContactData = ({ dispatch }) => {
       <div className={styles.tableCell}>{item.email}</div>
       <div className={styles.tableCell}>{item.phone}</div>
       <div className={styles.tableCellButton}>
-        <Link
-          to="/update"
+        <Link to={{
+          pathname: `/update/${item.id}`,
+          state: {item}
+        }}
           className={styles.tableCellButtonUpdate}
         >
           Update

@@ -1,18 +1,21 @@
 import React, { Component } from "react"
 import styles from "../../styles/UpdateContactForm.module.css"
+import { connect } from 'react-redux'
+import { contactUpdated } from '../../store/contacts'
+import { Link, withRouter } from 'react-router-dom'
 
 class UpdateContactForm extends Component {
   state = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    id: '',
+    firstName: this.props.location.state.item.firstName,
+    lastName: this.props.location.state.item.lastName,
+    email: this.props.location.state.item.email,
+    phone: this.props.location.state.item.phone,
+    id: this.props.location.state.item.id,
   }
 
   handleChange = (e) => {
     const { name, value } = e.target
-    const update = this.props.contactToUpdate
+    const update = this.props.item
 
     this.setState({
       ...update,
@@ -21,7 +24,8 @@ class UpdateContactForm extends Component {
   }
 
   submitForm = () => {
-    this.props.handleUpdateSubmit(this.state)
+    this.props.contactUpdated(this.state)
+    this.props.history.push('/')
   }
 
   render() {
@@ -72,10 +76,21 @@ class UpdateContactForm extends Component {
           value={phone}
           onChange={this.handleChange}
         />
-        <input type="button" value="Submit" onClick={this.submitForm} />
+        <Link onClick={this.submitForm}>
+          Submit
+        </Link>
       </form>
     )
   }
 }
 
-export default UpdateContactForm
+const mapStateToProps = state => ({
+  contacts: state.contacts
+  
+})
+
+const mapDispatchToProps = dispatch => ({
+  contactUpdated: contact => dispatch(contactUpdated(contact))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateContactForm)
