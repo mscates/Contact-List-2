@@ -7,7 +7,7 @@ const slice = createSlice({
   initialState: [],
   reducers: {
     contactAdded: (contacts, action) => {
-      console.log(action.payload)
+      
       contacts.push({
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
@@ -20,6 +20,7 @@ const slice = createSlice({
       return contacts.filter(contact => contact.id !== action.payload)
     },
     contactUpdated: (contacts, action) => {
+      console.log(action.payload)
       const index = contacts.findIndex(contact => contact.id === action.payload.id)
       contacts[index] = {
         firstName: action.payload.firstName,
@@ -27,7 +28,6 @@ const slice = createSlice({
         email: action.payload.email,
         phone: action.payload.phone,
         id: action.payload.id
-
       }
 
     }

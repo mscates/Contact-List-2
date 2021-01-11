@@ -6,8 +6,8 @@ import Header from "./Header"
 import AddContactForm from "../components/forms/AddContactForm"
 import { useSelector } from 'react-redux'
 
-
 const App =() => {
+  // put on home component
     const data = useSelector(state => state)
 
     return (

@@ -1,35 +1,36 @@
-import React, { Component } from "react"
+import React, { useState } from "react"
 import styles from "../../styles/UpdateContactForm.module.css"
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { contactUpdated } from '../../store/contacts'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
-class UpdateContactForm extends Component {
-  state = {
-    firstName: this.props.location.state.item.firstName,
-    lastName: this.props.location.state.item.lastName,
-    email: this.props.location.state.item.email,
-    phone: this.props.location.state.item.phone,
-    id: this.props.location.state.item.id,
-  }
+const UpdateContactForm = (props) => {
+  let history = useHistory()
+  const [updateContact, setUpdateContact] = useState({
+     firstName: props.location.state.item.firstName,
+     lastName: props.location.state.item.lastName,
+     email: props.location.state.item.email,
+     phone: props.location.state.item.phone,
+     id: props.location.state.item.id,
+  })
+  const dispatch = useDispatch()
 
-  handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target
-    const update = this.props.item
 
-    this.setState({
-      ...update,
+    setUpdateContact({
+      ...updateContact,
       [name]: value,
     })
   }
 
-  submitForm = () => {
-    this.props.contactUpdated(this.state)
-    this.props.history.push('/')
+  const submitForm = () => {
+    dispatch(contactUpdated(updateContact))
+    history.push('/')
   }
 
-  render() {
-    const { firstName, lastName, email, phone } = this.state
+  
+    const { firstName, lastName, email, phone } = updateContact
     return (
       <form className={styles.container}>
         <label className={styles.label} htmlFor="firstName">
@@ -41,7 +42,7 @@ class UpdateContactForm extends Component {
           name="firstName"
           id="firstName"
           value={firstName}
-          onChange={this.handleChange}
+          onChange={handleChange}
         />
         <label className={styles.label} htmlFor="lastName">
           Last Name
@@ -52,7 +53,7 @@ class UpdateContactForm extends Component {
           name="lastName"
           id="lastName"
           value={lastName}
-          onChange={this.handleChange}
+          onChange={handleChange}
         />
         <label className={styles.label} htmlFor="email">
           Email
@@ -63,7 +64,7 @@ class UpdateContactForm extends Component {
           name="email"
           id="email"
           value={email}
-          onChange={this.handleChange}
+          onChange={handleChange}
         />
         <label className={styles.label} htmlFor="phone">
           Phone
@@ -74,23 +75,25 @@ class UpdateContactForm extends Component {
           name="phone"
           id="phone"
           value={phone}
-          onChange={this.handleChange}
+          onChange={handleChange}
         />
-        <Link onClick={this.submitForm}>
+        <Link to="/" onClick={submitForm}>
           Submit
         </Link>
       </form>
     )
-  }
+
 }
 
-const mapStateToProps = state => ({
-  contacts: state.contacts
+
+export default UpdateContactForm
+// const mapStateToProps = state => ({
+//   contacts: state.contacts
   
-})
+// })
 
-const mapDispatchToProps = dispatch => ({
-  contactUpdated: contact => dispatch(contactUpdated(contact))
-})
+// const mapDispatchToProps = dispatch => ({
+//   contactUpdated: contact => dispatch(contactUpdated(contact))
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateContactForm)
+// export default connect(mapStateToProps, mapDispatchToProps)(UpdateContactForm)

@@ -8,11 +8,6 @@ import { Link } from 'react-router-dom'
 const ContactData = ({ dispatch }) => {
   const data = useSelector(state => state)
 
-  const findContact = (id) => {
-    const newContact = data.find(item => item.id === id)
-    return newContact
-  }
-
   const contacts = data.map((item) => (
     <div className={styles.tableRow} key={item.id}>
       <div className={styles.tableCell}>{item.firstName}</div>
@@ -47,5 +42,26 @@ const mapStateToProps = state => ({
   contacts: state.contacts
 })
 
-export default connect(mapStateToProps)(ContactData)
+const connection = connect(mapStateToProps);
+
+export default connection(ContactData)
+
+
+//// mapStateToProps | ContactData
+
+// const additionalProps = mapStateToProps();
+
+// <Wrapper props>
+//   <ContactData {...props} {...additionalProps} />
+// </Wrapper>
+
+// ///
+
+
+// <ContactData status={} />
+
+// props.status
+// props = { status, contacts }
+
+// props.contacts
 

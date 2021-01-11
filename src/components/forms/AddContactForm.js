@@ -1,11 +1,16 @@
-import React, { Component } from "react"
+import React, { useState } from "react"
 import styles from "../../styles/AddContactForm.module.css"
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { contactAdded } from '../../store/contacts'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom';
 
-class AddContactForm extends Component {
-  initialState = {
+const AddContactForm = () => {
+  let history = useHistory()
+  const [contact, setContact] = useState({})
+  const dispatch = useDispatch()
+
+  const initialState = {
     firstName: "",
     lastName: "",
     email: "",
@@ -20,33 +25,34 @@ class AddContactForm extends Component {
   }
   
 
-  state = this.initialState
 
-  handleFormReset = () => {
-    this.setState({ ...this.initialState, id: '' })
+  const handleFormReset = () => {
+    setContact({ ...initialState, id: '' })
   }
 
-  handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target
-    this.handleValidation(name, value)
-
-    this.setState({
-      [name]: value,
+    setContact({
+      ...contact,
+      [name]: value
     })
+    
+    // handleValidation(name, value)
+
   }
 
-  validateForm = (errors) => {
-    let valid = true
-    Object.values(errors).forEach((val) => val.length > 0 && (valid = false))
-    return valid
-  }
+  // const validateForm = (errors) => {
+  //   let valid = true
+  //   Object.values(errors).forEach((val) => val.length > 0 && (valid = false))
+  //   return valid
+  // }
 
-  handleInputFocus = () => {
-    this.setState({ inputFocus: true })
-  }
+  // handleInputFocus = () => {
+  //   this.setState({ inputFocus: true })
+  // }
 
-  handleValidation = (name, value) => {
-    let errors = this.state.errors
+  const handleValidation = (name, value) => {
+    let errors = contact.errors
     switch (name) {
       case "firstName":
         errors.firstName =
@@ -66,19 +72,17 @@ class AddContactForm extends Component {
       default:
         break
     }
-    this.setState({ errors, [name]: value }, () => {})
+    setContact({ errors, [name]: value }, () => {})
   }
 
-  submitAddContactForm = (e) => {
+  const submitAddContactForm = (e) => {
     e.preventDefault()
-    this.props.contactAdded(this.state)
-    this.handleFormReset()
-    this.props.history.push('/')
+    dispatch(contactAdded(contact))
+    handleFormReset()
+    history.push('/')
   }
-
-  render() {
    
-    const { firstName, lastName, email, phone, errors } = this.state
+    const { firstName, lastName, email, phone, errors } = contact
     return (
       <form className={styles.container}>
         <div className={styles.inputContainer}>
@@ -92,8 +96,8 @@ class AddContactForm extends Component {
             type="text"
             name="firstName"
             id="firstName"
-            value={firstName}
-            onChange={this.handleChange}
+            value={firstName || ''}
+            onChange={handleChange}
           />
         </div>
         <div className={styles.inputContainer}>
@@ -107,8 +111,8 @@ class AddContactForm extends Component {
             type="text"
             name="lastName"
             id="lastName"
-            value={lastName}
-            onChange={this.handleChange}
+            value={lastName || ''}
+            onChange={handleChange}
           />
         </div>
         <div className={styles.inputContainer}>
@@ -122,8 +126,8 @@ class AddContactForm extends Component {
             type="text"
             name="email"
             id="email"
-            value={email}
-            onChange={this.handleChange}
+            value={email || ''}
+            onChange={handleChange}
           />
         </div>
         <div className={styles.inputContainer}>
@@ -137,26 +141,27 @@ class AddContactForm extends Component {
             type="tel"
             name="phone"
             id="phone"
-            value={phone}
-            onChange={this.handleChange}
+            value={phone || ''}
+            onChange={handleChange}
           />
         </div>
-        <Link className={styles.submitAddContact} onClick={this.submitAddContactForm}>
+        <Link to="/" className={styles.submitAddContact} onClick={submitAddContactForm}>
           Submit
         </Link>
       </form>
     )
-  }
 }
 
-const mapStateToProps = state => ({
-  contacts: state.contacts
+export default AddContactForm
+
+// const mapStateToProps = state => ({
+//   contacts: state.contacts
   
-})
+// })
 
-const mapDispatchToProps = dispatch => ({
-  contactAdded: contact => dispatch(contactAdded(contact))
-})
+// const mapDispatchToProps = dispatch => ({
+//   contactAdded: contact => dispatch(contactAdded(contact))
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddContactForm)
+// export default connect(mapStateToProps, mapDispatchToProps)(AddContactForm)
 
