@@ -1,3 +1,4 @@
+//example code not used in app
 const mapStateToProps = state => ({
   contacts: state.contacts
   

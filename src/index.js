@@ -5,6 +5,7 @@ import App from "./components/App"
 import { BrowserRouter as Router } from "react-router-dom"
 import configureStore from './store/configureStore'
 import { Provider } from 'react-redux'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const store = configureStore()
 

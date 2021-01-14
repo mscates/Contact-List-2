@@ -1,15 +1,25 @@
 import React from "react"
-import styles from "../styles/Header.module.css"
 import { Link } from "react-router-dom"
+import { Container, Row, Col, Button  } from "react-bootstrap"
+
 
 const Header = () => {
   return (
-    <div className={styles.container}>
-      <h1>Basic Contact List</h1>
-      <Link to="/add" className={styles.btnStyles}>
-        Add Contact
-      </Link>
-    </div>
+    
+    <Container fluid>
+      <Row className="text-center">
+        <Col >
+          <h1>Basic Contact List</h1>
+        </Col>
+        <Col>
+        <Button variant="primary" size="lg">
+          <Link to="/add">
+            Add Contact
+          </Link>
+        </Button>
+        </Col>
+      </Row>
+    </Container>
   )
 }
 

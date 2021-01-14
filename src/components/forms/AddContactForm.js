@@ -1,6 +1,4 @@
 import React, { useState } from "react"
-import styles from "../../styles/AddContactForm.module.css"
-// import { connect } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { contactAdded } from '../../store/contacts'
 import { Link, useHistory } from 'react-router-dom';
@@ -84,15 +82,14 @@ const AddContactForm = () => {
    
     const { firstName, lastName, email, phone, errors } = contact
     return (
-      <form className={styles.container}>
-        <div className={styles.inputContainer}>
-          <div className={styles.labelContainer}>
-            <label className={styles.label} htmlFor="firstName">
+      <form>
+        <div>
+          <div>
+            <label htmlFor="firstName">
           First Name
             </label>
           </div>
           <input
-            className={styles.input}
             type="text"
             name="firstName"
             id="firstName"
@@ -100,14 +97,13 @@ const AddContactForm = () => {
             onChange={handleChange}
           />
         </div>
-        <div className={styles.inputContainer}>
-          <div className={styles.labelContainer}>
-            <label className={styles.label} htmlFor="lastName">
+        <div>
+          <div>
+            <label htmlFor="lastName">
               Last Name
             </label>
           </div>
           <input
-            className={styles.input}
             type="text"
             name="lastName"
             id="lastName"
@@ -115,14 +111,13 @@ const AddContactForm = () => {
             onChange={handleChange}
           />
         </div>
-        <div className={styles.inputContainer}>
-          <div className={styles.labelContainer}>
-            <label className={styles.label} htmlFor="email">
+        <div>
+          <div>
+            <label htmlFor="email">
               Email
             </label>
           </div>
           <input
-            className={styles.input}
             type="text"
             name="email"
             id="email"
@@ -130,14 +125,13 @@ const AddContactForm = () => {
             onChange={handleChange}
           />
         </div>
-        <div className={styles.inputContainer}>
-          <div className={styles.labelContainer}>
-            <label className={styles.label} htmlFor="phone">
+        <div>
+          <div>
+            <label htmlFor="phone">
               Phone
             </label>
           </div>
           <input
-            className={styles.input}
             type="tel"
             name="phone"
             id="phone"
@@ -145,7 +139,7 @@ const AddContactForm = () => {
             onChange={handleChange}
           />
         </div>
-        <Link to="/" className={styles.submitAddContact} onClick={submitAddContactForm}>
+        <Link to="/" onClick={submitAddContactForm}>
           Submit
         </Link>
       </form>

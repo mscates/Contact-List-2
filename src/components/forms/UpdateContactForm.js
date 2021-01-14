@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import styles from "../../styles/UpdateContactForm.module.css"
 import { useDispatch } from 'react-redux'
 import { contactUpdated } from '../../store/contacts'
 import { Link, useHistory } from 'react-router-dom'
@@ -32,45 +31,41 @@ const UpdateContactForm = (props) => {
   
     const { firstName, lastName, email, phone } = updateContact
     return (
-      <form className={styles.container}>
-        <label className={styles.label} htmlFor="firstName">
+      <form>
+        <label htmlFor="firstName">
           First Name
         </label>
         <input
-          className={styles.input}
           type="text"
           name="firstName"
           id="firstName"
           value={firstName}
           onChange={handleChange}
         />
-        <label className={styles.label} htmlFor="lastName">
+        <label htmlFor="lastName">
           Last Name
         </label>
         <input
-          className={styles.input}
           type="text"
           name="lastName"
           id="lastName"
           value={lastName}
           onChange={handleChange}
         />
-        <label className={styles.label} htmlFor="email">
+        <label htmlFor="email">
           Email
         </label>
         <input
-          className={styles.input}
           type="email"
           name="email"
           id="email"
           value={email}
           onChange={handleChange}
         />
-        <label className={styles.label} htmlFor="phone">
+        <label htmlFor="phone">
           Phone
         </label>
         <input
-          className={styles.input}
           type="tel"
           name="phone"
           id="phone"

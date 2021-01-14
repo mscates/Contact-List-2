@@ -12,3 +12,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+button a {
+  color: #fff;
+  
+}
+
+button a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
