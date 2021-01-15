@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useDispatch } from 'react-redux'
 import { contactAdded } from '../../store/contacts'
 import { Link, useHistory } from 'react-router-dom';
+import { Form, Button, Container, Row, Col} from 'react-bootstrap'
 
 const AddContactForm = () => {
   let history = useHistory()
@@ -82,67 +83,67 @@ const AddContactForm = () => {
    
     const { firstName, lastName, email, phone, errors } = contact
     return (
-      <form>
-        <div>
-          <div>
-            <label htmlFor="firstName">
+      <Container>
+        <Row className="justify-content-center mt-4">
+          <Col xs={10}>
+      <Form>
+       <Form.Group controlId="firstName">
+            <Form.Label>
           First Name
-            </label>
-          </div>
-          <input
+            </Form.Label>
+      
+          <Form.Control
             type="text"
             name="firstName"
-            id="firstName"
             value={firstName || ''}
             onChange={handleChange}
           />
-        </div>
-        <div>
-          <div>
-            <label htmlFor="lastName">
+        </Form.Group>
+        <Form.Group controlId="lastName">
+            <Form.Label>
               Last Name
-            </label>
-          </div>
-          <input
+            </Form.Label>
+          
+          <Form.Control
             type="text"
             name="lastName"
-            id="lastName"
             value={lastName || ''}
             onChange={handleChange}
           />
-        </div>
-        <div>
-          <div>
-            <label htmlFor="email">
+       </Form.Group>
+       <Form.Group controlId="email">
+            <Form.Label>
               Email
-            </label>
-          </div>
-          <input
+            </Form.Label>
+          
+          <Form.Control
             type="text"
             name="email"
-            id="email"
             value={email || ''}
             onChange={handleChange}
           />
-        </div>
-        <div>
-          <div>
-            <label htmlFor="phone">
+        </Form.Group>
+        <Form.Group controlId="phone"> 
+            <Form.Label>
               Phone
-            </label>
-          </div>
-          <input
+            </Form.Label>
+          
+          <Form.Control
             type="tel"
             name="phone"
-            id="phone"
             value={phone || ''}
             onChange={handleChange}
           />
-        </div>
+        </Form.Group>
+        <Button>
         <Link to="/" onClick={submitAddContactForm}>
           Submit
         </Link>
-      </form>
+        </Button>
+      </Form>
+      </Col>
+      </Row>
+      </Container>
     )
 }
 
