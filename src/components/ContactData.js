@@ -3,33 +3,42 @@ import { useSelector } from 'react-redux'
 import { contactRemoved } from '../store/contacts'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { Card, Button } from 'react-bootstrap'
 
 const ContactData = ({ dispatch }) => {
   const data = useSelector(state => state)
-
   const contacts = data.map((item) => (
-    <div key={item.id}>
-      <div>{item.firstName}</div>
-      <div>{item.lastName}</div>
-      <div>{item.email}</div>
-      <div>{item.phone}</div>
-      <div>
+    
+    
+    <Card className="mr-5" key={item.id} style={{ width: '16rem' }}>
+   <Card.Body>
+     <Card.Title>{item.firstName} {item.lastName}</Card.Title>
+      <Card.Text>{item.email}</Card.Text>
+      <Card.Text>{item.phone}</Card.Text>
+      
+      <Card.Link>
+        <Button>
         <Link to={{
           pathname: `/update/${item.id}`,
           state: {item}
         }} 
         >
           Update
+          
         </Link>
-      </div>
-      <div>
-        <button
+        </Button>
+        </Card.Link>
+     <Card.Link>
+        <Button
           onClick={() => dispatch(contactRemoved(item.id))}
         >
           Delete
-        </button>
-      </div>
-    </div>
+        </Button>
+        </Card.Link>
+    </Card.Body>
+    </Card>
+   
+ 
   ))
 
   return <React.Fragment>{contacts}</React.Fragment>

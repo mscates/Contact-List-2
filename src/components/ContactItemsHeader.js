@@ -1,11 +1,17 @@
 import React from "react"
 import ContactData from "./ContactData"
+import { Container, Row, Col } from 'react-bootstrap'
 
 const ContactItemsHeader = () => {
   return (
-    <div>
+    <Container>
+      <Row>
+        
       <ContactData />
-    </div>
+     
+      </Row>
+      </Container>
+  
   )
 }
 
