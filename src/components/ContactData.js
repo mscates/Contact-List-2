@@ -10,31 +10,32 @@ const ContactData = ({ dispatch }) => {
   const contacts = data.map((item) => (
     
     
-    <Card className="mr-5" key={item.id} style={{ width: '16rem' }}>
+    <Card className="mt-5 mr-5 mb-4" key={item.id} style={{ width: '16rem' }}>
    <Card.Body>
      <Card.Title>{item.firstName} {item.lastName}</Card.Title>
       <Card.Text>{item.email}</Card.Text>
       <Card.Text>{item.phone}</Card.Text>
       
-      <Card.Link>
-        <Button>
+      
+        
         <Link to={{
           pathname: `/update/${item.id}`,
           state: {item}
         }} 
         >
+          <Button>
           Update
-          
+          </Button>
         </Link>
-        </Button>
-        </Card.Link>
-     <Card.Link>
+       
+        
+     
         <Button
           onClick={() => dispatch(contactRemoved(item.id))}
         >
           Delete
         </Button>
-        </Card.Link>
+        
     </Card.Body>
     </Card>
    

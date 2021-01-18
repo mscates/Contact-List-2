@@ -1,88 +1,53 @@
-import React, { useState } from "react"
-import { useDispatch } from 'react-redux'
-import { contactAdded } from '../../store/contacts'
-import { Link, useHistory } from 'react-router-dom';
-import { Form, Button, Container, Row, Col} from 'react-bootstrap'
+import React from "react"
+
+import { Link } from 'react-router-dom';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap'
+import useForm from '../../useForm'
+import validate from '../../validateValues'
 
 const AddContactForm = () => {
-  let history = useHistory()
-  const [contact, setContact] = useState({})
-  const dispatch = useDispatch()
-
-  const initialState = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    id: '',
-    errors: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-    },
-  }
+  
+  const { handleChange, values, handleSubmit, errors} = useForm(validate)
   
 
+  // const handleValidation = (name, value) => {
+  //   const emailRegex = /\S+@\S+\.\S+/
+  //   if(name === 'firstName' && value.length === 0){
+  //     setContactErrors({...contactErrors, [name]: "First Name is required"})
+  //   }
+  //   if(name === 'lastName' && value.length === 0){
+  //     setContactErrors({...contactErrors, [name]: "Last Name is required"})
+  //   }
+  //   if(name === 'email' && !emailRegex.test(value)){
+  //     setContactErrors({...contactErrors, [name]: "Email is not valid"})
+  //   }
+  //   if(name === 'phone' & value.length !== 10){
+  //     setContactErrors({...contactErrors, [name]: "Phone must be ten numbers"})
+  //   }
+  //   switch (name) {
+  //     case "firstName":
+  //       value.length === 0 ? contactErrors.push("First Name is required") : null
+  //       break
+  //     case "lastName":
+  //       contactErrors.lastNameError =
+  //         value.length === 0 ? "Last Name is required" : ""
+  //       break
+  //     case "email":
+  //       const emailRegex = /\S+@\S+\.\S+/
+  //       contactErrors.emailError = emailRegex.test(value) ? "" : "Email is not valid"
+  //       break
+  //     case "phone":
+  //       contactErrors.phoneError = value.length === 0 ? "Phone must have 10 numbers" : ""
+  //       break
+  //     default:
+  //       break
+  //   }
+  // }
 
-  const handleFormReset = () => {
-    setContact({ ...initialState, id: '' })
-  }
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setContact({
-      ...contact,
-      [name]: value
-    })
+  
     
-    // handleValidation(name, value)
-
-  }
-
-  // const validateForm = (errors) => {
-  //   let valid = true
-  //   Object.values(errors).forEach((val) => val.length > 0 && (valid = false))
-  //   return valid
-  // }
-
-  // handleInputFocus = () => {
-  //   this.setState({ inputFocus: true })
-  // }
-
-  const handleValidation = (name, value) => {
-    let errors = contact.errors
-    switch (name) {
-      case "firstName":
-        errors.firstName =
-          value.length < 2 ? "First Name must be at least 2 characters" : ""
-        break
-      case "lastName":
-        errors.lastName =
-          value.length < 2 ? "First Name must be at least 2 characters" : ""
-        break
-      case "email":
-        const emailRegex = /\S+@\S+\.\S+/
-        errors.email = emailRegex.test(value) ? "" : "Email is not valid"
-        break
-      case "phone":
-        errors.phone = value.length === 10 ? "" : "Phone is not valid"
-        break
-      default:
-        break
-    }
-    setContact({ errors, [name]: value }, () => {})
-  }
-
-  const submitAddContactForm = (e) => {
-    e.preventDefault()
-    dispatch(contactAdded(contact))
-    handleFormReset()
-    history.push('/')
-  }
-   
-    const { firstName, lastName, email, phone, errors } = contact
     return (
+      
       <Container>
         <Row className="justify-content-center mt-4">
           <Col xs={10}>
@@ -91,14 +56,14 @@ const AddContactForm = () => {
             <Form.Label>
           First Name
             </Form.Label>
-      
           <Form.Control
             type="text"
             name="firstName"
-            value={firstName || ''}
+            value={values.firstName}
             onChange={handleChange}
           />
         </Form.Group>
+      {errors.firstName && <p>{errors.firstName}</p>}
         <Form.Group controlId="lastName">
             <Form.Label>
               Last Name
@@ -107,10 +72,11 @@ const AddContactForm = () => {
           <Form.Control
             type="text"
             name="lastName"
-            value={lastName || ''}
+            value={values.lastName}
             onChange={handleChange}
           />
        </Form.Group>
+       {errors.lastName && <p>{errors.lastName}</p>}
        <Form.Group controlId="email">
             <Form.Label>
               Email
@@ -119,10 +85,11 @@ const AddContactForm = () => {
           <Form.Control
             type="text"
             name="email"
-            value={email || ''}
+            value={values.email}
             onChange={handleChange}
           />
         </Form.Group>
+        {errors.email && <p>{errors.email}</p>}
         <Form.Group controlId="phone"> 
             <Form.Label>
               Phone
@@ -131,12 +98,13 @@ const AddContactForm = () => {
           <Form.Control
             type="tel"
             name="phone"
-            value={phone || ''}
+            value={values.phone}
             onChange={handleChange}
           />
         </Form.Group>
+        {errors.phone && <p>{errors.phone}</p>}
         <Button>
-        <Link to="/" onClick={submitAddContactForm}>
+        <Link to="/" onClick={handleSubmit}>
           Submit
         </Link>
         </Button>

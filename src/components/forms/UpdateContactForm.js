@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useDispatch } from 'react-redux'
 import { contactUpdated } from '../../store/contacts'
 import { Link, useHistory } from 'react-router-dom'
+import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 
 const UpdateContactForm = (props) => {
   let history = useHistory()
@@ -31,51 +32,64 @@ const UpdateContactForm = (props) => {
   
     const { firstName, lastName, email, phone } = updateContact
     return (
-      <form>
-        <label htmlFor="firstName">
+      <Container>
+        <Row className="justify-content-center mt-4">
+          <Col xs={10}>
+      <Form noValidate>
+      <Form.Group controlId="firstName">
+        <Form.Label>
           First Name
-        </label>
-        <input
+        </Form.Label>
+        <Form.Control
           type="text"
           name="firstName"
-          id="firstName"
           value={firstName}
           onChange={handleChange}
         />
-        <label htmlFor="lastName">
+        </Form.Group>
+        <Form.Group controlId="lastName">
+        <Form.Label>
           Last Name
-        </label>
-        <input
+        </Form.Label>
+        <Form.Control
           type="text"
           name="lastName"
-          id="lastName"
+          
           value={lastName}
           onChange={handleChange}
         />
-        <label htmlFor="email">
+        </Form.Group>
+        <Form.Group controlId="email">
+        <Form.Label>
           Email
-        </label>
-        <input
+        </Form.Label>
+        <Form.Control
           type="email"
           name="email"
-          id="email"
+     
           value={email}
           onChange={handleChange}
         />
-        <label htmlFor="phone">
+        </Form.Group>
+        <Form.Group controlId="phone">
+        <Form.Label>
           Phone
-        </label>
-        <input
+        </Form.Label>
+        <Form.Control
           type="tel"
-          name="phone"
-          id="phone"
           value={phone}
           onChange={handleChange}
         />
+        </Form.Group>
+        <Button>
         <Link to="/" onClick={submitForm}>
           Submit
         </Link>
-      </form>
+        </Button>
+      </Form>
+      </Col>
+        </Row>
+      </Container>
     )
 
 }

@@ -7,7 +7,7 @@ const Header = () => {
   return (
     
     <Container fluid>
-      <Row className="text-center">
+      <Row className="text-center pt-4">
         <Col >
           <h1>Basic Contact List</h1>
         </Col>

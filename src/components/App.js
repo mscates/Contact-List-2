@@ -5,6 +5,8 @@ import Home from "./Home"
 import Header from "./Header"
 import AddContactForm from "../components/forms/AddContactForm"
 import { useSelector } from 'react-redux'
+import image from './images/background2.jpg'
+
 
 
 const App =() => {
@@ -12,7 +14,9 @@ const App =() => {
     const data = useSelector(state => state)
 
     return (
-      <div>
+  
+        <div style={{backgroundImage: `url(${image})`, margin: 0,backgroundSize: 'cover', height: '100vh', width: '100%'}}>
+    
         <Header />
         <Switch>
           <Route
