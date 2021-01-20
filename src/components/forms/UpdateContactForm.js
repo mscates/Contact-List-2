@@ -1,36 +1,11 @@
-import React, { useState } from "react"
-import { useDispatch } from 'react-redux'
-import { contactUpdated } from '../../store/contacts'
-import { Link, useHistory } from 'react-router-dom'
-import { Form, Button, Container, Row, Col } from 'react-bootstrap'
+import React from "react"
+import { Link } from 'react-router-dom'
+import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap'
+import useUpdateForm from "../../useUpdateForm";
 
 const UpdateContactForm = (props) => {
-  let history = useHistory()
-  const [updateContact, setUpdateContact] = useState({
-     firstName: props.location.state.item.firstName,
-     lastName: props.location.state.item.lastName,
-     email: props.location.state.item.email,
-     phone: props.location.state.item.phone,
-     id: props.location.state.item.id,
-  })
-  const dispatch = useDispatch()
+  const { handleChange, updateValues, handleSubmit, errors } = useUpdateForm(props);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-
-    setUpdateContact({
-      ...updateContact,
-      [name]: value,
-    })
-  }
-
-  const submitForm = () => {
-    dispatch(contactUpdated(updateContact))
-    history.push('/')
-  }
-
-  
-    const { firstName, lastName, email, phone } = updateContact
     return (
       <Container>
         <Row className="justify-content-center mt-4">
@@ -43,10 +18,15 @@ const UpdateContactForm = (props) => {
         <Form.Control
           type="text"
           name="firstName"
-          value={firstName}
+          value={updateValues.firstName}
           onChange={handleChange}
         />
         </Form.Group>
+        {errors.firstName && (
+              <Alert className="p-1" variant="danger">
+                {errors.firstName}
+              </Alert>
+            )}
         <Form.Group controlId="lastName">
         <Form.Label>
           Last Name
@@ -55,7 +35,7 @@ const UpdateContactForm = (props) => {
           type="text"
           name="lastName"
           
-          value={lastName}
+          value={updateValues.lastName}
           onChange={handleChange}
         />
         </Form.Group>
@@ -67,7 +47,7 @@ const UpdateContactForm = (props) => {
           type="email"
           name="email"
      
-          value={email}
+          value={updateValues.email}
           onChange={handleChange}
         />
         </Form.Group>
@@ -77,12 +57,12 @@ const UpdateContactForm = (props) => {
         </Form.Label>
         <Form.Control
           type="tel"
-          value={phone}
+          value={updateValues.phone}
           onChange={handleChange}
         />
         </Form.Group>
         <Button>
-        <Link to="/" onClick={submitForm}>
+        <Link to="/" onClick={handleSubmit}>
           Submit
         </Link>
         </Button>
