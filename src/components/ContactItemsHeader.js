@@ -1,18 +1,15 @@
-import React from "react"
-import ContactData from "./ContactData"
-import { Container, Row, Col } from 'react-bootstrap'
+import React from "react";
+import ContactData from "./ContactData";
+import { Container, Row } from "react-bootstrap";
 
 const ContactItemsHeader = () => {
   return (
     <Container>
       <Row>
-        
-      <ContactData />
-     
+        <ContactData />
       </Row>
-      </Container>
-  
-  )
-}
+    </Container>
+  );
+};
 
-export default ContactItemsHeader
+export default ContactItemsHeader;

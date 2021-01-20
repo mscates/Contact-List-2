@@ -1,43 +1,43 @@
-import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { contactAdded } from './store/contacts'
-import { useHistory } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { contactAdded } from "./store/contacts";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import validateValues from "./validateValues";
 
-const useForm = (validate, callback) => {
-  let history = useHistory()
-  const dispatch = useDispatch()
+const useForm = () => {
+  let history = useHistory();
+  const dispatch = useDispatch();
   const [values, setValues] = useState({
-    firstName: '',
-    lastName: '',
-    phone: '',
-    email: '',
-  })
-  const [errors, setErrors] = useState({})
-const [isSubmitting, setIsSubmitting] = useState(false)
+    firstName: "",
+    lastName: "",
+    phone: "",
+    email: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = e => {
-    const { name, value } = e.target
-   setValues({
-     ...values,
-    [name]: value
-   })
- }
- const handleSubmit = (e) => {
-  e.preventDefault()
-  setErrors(validate(values))
-  setIsSubmitting(true)
-  dispatch(contactAdded(values)) 
-  history.push('/')
-}
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
 
-useEffect(() => {
-  if(Object.keys(errors).length === 0 && isSubmitting){
-    callback()
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setErrors(validateValues(values));
+    setIsSubmitting(true);
+  };
+
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && isSubmitting) {
+      dispatch(contactAdded(values));
+      history.push("/");
     }
-},[errors])
+  }, [errors, dispatch, history, values, isSubmitting]);
 
+  return { handleChange, values, handleSubmit, errors };
+};
 
-  return {handleChange, values, handleSubmit, errors}
-}
- 
 export default useForm;
