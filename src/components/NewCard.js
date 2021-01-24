@@ -1,22 +1,36 @@
-import React from 'react';
-import { Card, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Card, Button, ListGroup } from "react-bootstrap";
 import Styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 import { contactRemoved } from "../store/contacts";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 
 const NewCard = ({ item }) => {
-  const dispatch = useDispatch()
-  return ( 
-    <Card key={item.id} style={{ width: "18rem" }}>
-      <Card.Img variant="top" src="https://picsum.photos/200"/>
+  const [showListGroup, setShowListGroup] = useState(false);
+
+  const dispatch = useDispatch();
+
+  return (
+    <Card
+      onMouseEnter={() => setShowListGroup(true)}
+      onMouseLeave={() => setShowListGroup(false)}
+      key={item.id}
+      style={{ width: "16rem" }}
+    >
       <Card.Body>
         <Card.Title className={`${Styles.cardTitle} font-italic`}>
           {item.firstName} {item.lastName}
         </Card.Title>
-        <Card.Text>{item.email}</Card.Text>
-        <Card.Text>{item.phone}</Card.Text>
-
+      </Card.Body>
+      {showListGroup ? (
+        <div>
+          <ListGroup variant="flush">
+            <ListGroup.Item>{item.email}</ListGroup.Item>
+            <ListGroup.Item>{item.phone}</ListGroup.Item>
+          </ListGroup>
+        </div>
+      ) : null}
+      <Card.Body className={Styles.buttons}>
         <Link
           to={{
             pathname: `/update/${item.id}`,
@@ -26,12 +40,14 @@ const NewCard = ({ item }) => {
           <Button>Update</Button>
         </Link>
 
-        <Button onClick={() => dispatch(contactRemoved(item.id))}>
-          Delete
-        </Button>
+        <Card.Link>
+          <Button onClick={() => dispatch(contactRemoved(item.id))}>
+            Delete
+          </Button>
+        </Card.Link>
       </Card.Body>
     </Card>
-   );
-}
- 
+  );
+};
+
 export default NewCard;
