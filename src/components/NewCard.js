@@ -15,7 +15,7 @@ const NewCard = ({ item }) => {
       onMouseEnter={() => setShowListGroup(true)}
       onMouseLeave={() => setShowListGroup(false)}
       key={item.id}
-      style={{ width: "16rem" }}
+      style={{ width: "16rem", height: "20rem" }}
     >
       <Card.Body>
         <Card.Title className={`${Styles.cardTitle} font-italic`}>
