@@ -4,7 +4,8 @@ import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap'
 import useUpdateForm from "../../useUpdateForm";
 
 const UpdateContactForm = (props) => {
-  const { handleChange, updateValues, handleSubmit, errors } = useUpdateForm(props);
+  const { handleChange, updateValues, handleSubmit, errors } = useUpdateForm(props.location.state.item);
+ 
 
     return (
       <Container>
@@ -16,6 +17,7 @@ const UpdateContactForm = (props) => {
           First Name
         </Form.Label>
         <Form.Control
+        className={errors.firstName ? 'border-danger' : null}
           type="text"
           name="firstName"
           value={updateValues.firstName}
@@ -23,7 +25,7 @@ const UpdateContactForm = (props) => {
         />
         </Form.Group>
         {errors.firstName && (
-              <Alert className="p-1" variant="danger">
+              <Alert className="p-1" variant="light">
                 {errors.firstName}
               </Alert>
             )}

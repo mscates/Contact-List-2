@@ -1,5 +1,5 @@
 import React from "react";
-import ContactData from "./ContactData";
+import ContactData from "./Cards";
 import { Container, Row } from "react-bootstrap";
 
 const ContactItemsHeader = () => {

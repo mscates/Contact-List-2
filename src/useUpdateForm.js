@@ -6,14 +6,15 @@ import validateValues from "./validateValues";
 
 
 const useUpdateForm = (props) => {
+  console.log(props)
   let history = useHistory();
   const dispatch = useDispatch();
   const [updateValues, setUpdateValues] = useState({
-    firstName: props.location.state.item.firstName,
-    lastName: props.location.state.item.lastName,
-    email: props.location.state.item.email,
-    phone: props.location.state.item.phone,
-    id: props.location.state.item.id,
+    firstName: props.firstName,
+    lastName: props.lastName,
+    email: props.email,
+    phone: props.phone,
+    id: props.id,
   });
 
   const [errors, setErrors] = useState({});

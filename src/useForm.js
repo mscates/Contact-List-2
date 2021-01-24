@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import validateValues from "./validateValues";
 
-const useForm = () => {
+const useForm = (props) => {
   let history = useHistory();
   const dispatch = useDispatch();
   const [values, setValues] = useState({
@@ -35,7 +35,7 @@ const useForm = () => {
       dispatch(contactAdded(values));
       history.push("/");
     }
-  }, [errors, dispatch, history, values, isSubmitting]);
+  }, [errors]);
 
   return { handleChange, values, handleSubmit, errors };
 };

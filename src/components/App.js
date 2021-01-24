@@ -4,8 +4,7 @@ import UpdateContactForm from "../components/forms/UpdateContactForm";
 import Home from "./Home";
 import Header from "./Header";
 import AddContactForm from "../components/forms/AddContactForm";
-
-import image from "./images/background2.jpg";
+// import image from "./images/background2.jpg";
 
 const App = () => {
   
@@ -14,9 +13,9 @@ const App = () => {
   return (
     <div
       style={{
-        backgroundImage: `url(${image})`,
-        margin: 0,
-        backgroundSize: "cover",
+        backgroundColor: '#eeeeee',
+        // margin: 0,
+        // backgroundSize: "cover",
         height: "100vh",
         width: "100%",
       }}

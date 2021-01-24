@@ -1,11 +1,15 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
-import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import useForm from "../../useForm";
 
 const AddContactForm = () => {
   const { handleChange, values, handleSubmit, errors } = useForm();
+  const {firstName, lastName, phone, email} = errors
+
+  const errorInputBorder = (name) => {
+    return name ? 'border-danger' : null
+  }
   
   return (
     <Container>
@@ -14,52 +18,56 @@ const AddContactForm = () => {
           <Form noValidate>
             <Form.Group controlId="firstName">
               <Form.Label>First Name</Form.Label>
+              
               <Form.Control
-                required
+              className={errorInputBorder(firstName)}
                 type="text"
                 name="firstName"
                 value={values.firstName}
                 onChange={handleChange}
               />
             </Form.Group>
-            {errors.firstName && (
-              <Alert className="p-1" variant="danger">
-                {errors.firstName}
-              </Alert>
+            {firstName && (
+              <p className="text-danger">
+                {firstName}
+              </p>
             )}
 
             <Form.Group controlId="lastName">
               <Form.Label>Last Name</Form.Label>
               <Form.Control
+              className={errorInputBorder(lastName)}
                 type="text"
                 name="lastName"
                 value={values.lastName}
                 onChange={handleChange}
               />
             </Form.Group>
-            {errors.lastName && <p>{errors.lastName}</p>}
+            {lastName && <p className="text-danger">{lastName}</p>}
             <Form.Group controlId="email">
               <Form.Label>Email</Form.Label>
 
               <Form.Control
+              className={errorInputBorder(email)}
                 type="text"
                 name="email"
                 value={values.email}
                 onChange={handleChange}
               />
             </Form.Group>
-            {errors.email && <p>{errors.email}</p>}
+            {errors.email && <p className="text-danger">{errors.email}</p>}
             <Form.Group controlId="phone">
               <Form.Label>Phone</Form.Label>
 
               <Form.Control
+              className={errorInputBorder(phone)}
                 type="tel"
                 name="phone"
                 value={values.phone}
                 onChange={handleChange}
               />
             </Form.Group>
-            {errors.phone && <p>{errors.phone}</p>}
+            {errors.phone && <p className="text-danger">{errors.phone}</p>}
             <Button>
               <Link to="/" onClick={handleSubmit}>
                 Submit
