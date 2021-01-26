@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import { Card, Button, ListGroup } from "react-bootstrap";
+import { Card, ListGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 import { contactRemoved } from "../store/contacts";
 import { useDispatch } from "react-redux";
+import {
+  faTrash,
+  faEdit,
+  faInfoCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NewCard = ({ item }) => {
   const [showListGroup, setShowListGroup] = useState(false);
@@ -15,37 +21,59 @@ const NewCard = ({ item }) => {
       onMouseEnter={() => setShowListGroup(true)}
       onMouseLeave={() => setShowListGroup(false)}
       key={item.id}
-      style={{ width: "16rem", height: "20rem" }}
+      className={Styles.mainCard}
     >
-      <Card.Body>
+      <Card.Body className={Styles.cardBody}>
         <Card.Title className={`${Styles.cardTitle} font-italic`}>
           {item.firstName} {item.lastName}
         </Card.Title>
+        <OverlayTrigger
+        key={'top'}
+        placement={'top'}
+        overlay={
+          <Tooltip id={`tooltip-top`}>
+            Click for More Info
+          </Tooltip>
+        }
+        >
+          <FontAwesomeIcon
+            className={Styles.infoIcon}
+            icon={faInfoCircle}
+          ></FontAwesomeIcon>
+        </OverlayTrigger>
       </Card.Body>
       {showListGroup ? (
         <div>
-          <ListGroup variant="flush">
-            <ListGroup.Item>{item.email}</ListGroup.Item>
-            <ListGroup.Item>{item.phone}</ListGroup.Item>
+          <ListGroup>
+            <ListGroup.Item className={Styles.listGroup}>
+              {item.email}
+            </ListGroup.Item>
+            <ListGroup.Item className={Styles.listGroup}>
+              {item.phone}
+            </ListGroup.Item>
           </ListGroup>
+          <div className={Styles.alignIcons}>
+            <Link
+              to={{
+                pathname: `/update/${item.id}`,
+                state: { item },
+              }}
+            >
+              <FontAwesomeIcon
+                className={(Styles.icon, Styles.iconUpdate)}
+                icon={faEdit}
+              ></FontAwesomeIcon>
+            </Link>
+            <Link to="/">
+              <FontAwesomeIcon
+                className={(Styles.icon, Styles.iconDelete)}
+                icon={faTrash}
+                onClick={() => dispatch(contactRemoved(item.id))}
+              ></FontAwesomeIcon>
+            </Link>
+          </div>
         </div>
       ) : null}
-      <Card.Body className={Styles.buttons}>
-        <Link
-          to={{
-            pathname: `/update/${item.id}`,
-            state: { item },
-          }}
-        >
-          <Button>Update</Button>
-        </Link>
-
-        <Card.Link>
-          <Button onClick={() => dispatch(contactRemoved(item.id))}>
-            Delete
-          </Button>
-        </Card.Link>
-      </Card.Body>
     </Card>
   );
 };

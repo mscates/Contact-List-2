@@ -1,12 +1,11 @@
 import React from "react";
-import ContactData from "./Cards";
+import Cards from "./Cards";
 import { Container, Row } from "react-bootstrap";
 
 const ContactItemsHeader = () => {
   return (
-    <Container>
-      <Row>
-        <ContactData />
+    
+        <Cards />
       </Row>
     </Container>
   );

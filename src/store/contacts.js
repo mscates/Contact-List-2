@@ -1,41 +1,41 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
-let lastId = 0
+let lastId = 0;
 
 const slice = createSlice({
-  name: 'contacts',
+  name: "contacts",
   initialState: [],
   reducers: {
     contactAdded: (contacts, action) => {
-      
       contacts.push({
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         email: action.payload.email,
         phone: action.payload.phone,
-        id: ++lastId            
-      })
+        id: ++lastId,
+      });
     },
     contactRemoved: (contacts, action) => {
-      return contacts.filter(contact => contact.id !== action.payload)
+      return contacts.filter((contact) => contact.id !== action.payload);
     },
     contactUpdated: (contacts, action) => {
-      console.log(action.payload)
-      const index = contacts.findIndex(contact => contact.id === action.payload.id)
+      console.log(action.payload);
+      const index = contacts.findIndex(
+        (contact) => contact.id === action.payload.id
+      );
       contacts[index] = {
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         email: action.payload.email,
         phone: action.payload.phone,
-        id: action.payload.id
-      }
+        id: action.payload.id,
+      };
+    },
+  },
+});
 
-    }
-  }
-})
-
-export const { contactAdded, contactRemoved, contactUpdated } = slice.actions
-export default slice.reducer
+export const { contactAdded, contactRemoved, contactUpdated } = slice.actions;
+export default slice.reducer;
 // Action types
 // with redux toolkit we don't need these constants
 // const CONTACT_ADDED = "contactAdded"
@@ -73,7 +73,7 @@ export default slice.reducer
 //       lastName: action.payload.lastName,
 //       email: action.payload.email,
 //       phone: action.payload.phone,
-//       id: ++lastId            
+//       id: ++lastId
 //     })
 //   },
 //   [contactRemoved.type]: (contacts, action) => {
@@ -96,7 +96,7 @@ export default slice.reducer
 //         }
 //       ]
 //     case contactRemoved.type:
-//       return state.filter(contact => contact.id !== action.payload.id)  
+//       return state.filter(contact => contact.id !== action.payload.id)
 //     default:
 //       return state
 //   }

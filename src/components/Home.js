@@ -1,12 +1,12 @@
 import React from "react"
-import ContactItemsHeader from "./ContactItemsHeader"
+import Cards from './Cards'
 import { useSelector } from "react-redux";
 
 const Home = () => {
   const data = useSelector((state) => state);
   return (
     <div>
-   <ContactItemsHeader data={data}/>
+   <Cards data={data}/>
     </div>
   )
 }

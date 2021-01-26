@@ -1,16 +1,44 @@
 .cardTitle {
   font-size: 25px !important;
-  color: cadetblue;
+  color: #fff;
+}
+.cardBody {
+  position: relative;
+}
+.infoIcon {
+  position: absolute;
+  right: 5px;
+  top: 5px;
 }
 
-.buttons {
+.mainCard {
+  width: 16rem;
+  background-color: #6699CC !important;
+}
+
+.listGroup {
+  background-color: #6699CC !important;
+  border: none !important;
+}
+.iconUpdate {
+  color: #f06543;
+  background-color: linear-gradient(315deg, #f06543 0%, #ffbe3d 74%);
+  margin: 5px;
+}
+.iconUpdate:hover {
+  color: #ff8c00;
+}
+
+.iconDelete {
+  color: #eb4511;
+  background-color: linear-gradient(315deg, #eb4511 0%, #b02e0c 74%);
+  margin: 5px;
+}
+
+.icon {
+  font-size: 1em;
+}
+.alignIcons {
   display: flex;
-  justify-content: space-around;
-  margin-top: 30px;
+  justify-content: space-between;
 }
-
-.buttons a {
-  padding-bottom: 5px;
-}
-
-
