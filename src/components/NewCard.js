@@ -3,12 +3,21 @@ import { Card, ListGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 import { contactRemoved } from "../store/contacts";
+import people1 from './images/people-1a.jpg'
 import { useDispatch } from "react-redux";
 import {
   faTrash,
   faEdit,
   faInfoCircle,
+  faEnvelope,
+  faMobile,
 } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTwitter,
+  faFacebook,
+  faLinkedin,
+  faInstagram
+} from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NewCard = ({ item }) => {
@@ -18,16 +27,19 @@ const NewCard = ({ item }) => {
 
   return (
     <Card
-      onMouseEnter={() => setShowListGroup(true)}
-      onMouseLeave={() => setShowListGroup(false)}
+      // onMouseEnter={() => setShowListGroup(true)}
+      // onMouseLeave={() => setShowListGroup(false)}
       key={item.id}
       className={Styles.mainCard}
     >
       <Card.Body className={Styles.cardBody}>
+        <div className={Styles.img}>
+          <img src={people1} alt="" />
+        </div>
         <Card.Title className={`${Styles.cardTitle} font-italic`}>
           {item.firstName} {item.lastName}
         </Card.Title>
-        <OverlayTrigger
+        {/* <OverlayTrigger
         key={'top'}
         placement={'top'}
         overlay={
@@ -40,19 +52,25 @@ const NewCard = ({ item }) => {
             className={Styles.infoIcon}
             icon={faInfoCircle}
           ></FontAwesomeIcon>
-        </OverlayTrigger>
-      </Card.Body>
+        </OverlayTrigger> */}
+      
       {showListGroup ? (
-        <div>
-          <ListGroup>
+        <div className={Styles.socials}>
+          <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon>
+          <FontAwesomeIcon icon={faMobile}></FontAwesomeIcon>
+          <FontAwesomeIcon icon={faTwitter}></FontAwesomeIcon>
+          <FontAwesomeIcon icon={faFacebook}></FontAwesomeIcon>
+          <FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon>
+          <FontAwesomeIcon icon={faInstagram}></FontAwesomeIcon>
+          {/* <ListGroup>
             <ListGroup.Item className={Styles.listGroup}>
               {item.email}
             </ListGroup.Item>
             <ListGroup.Item className={Styles.listGroup}>
               {item.phone}
             </ListGroup.Item>
-          </ListGroup>
-          <div className={Styles.alignIcons}>
+          </ListGroup> */}
+          {/* <div className={Styles.alignIcons}>
             <Link
               to={{
                 pathname: `/update/${item.id}`,
@@ -71,9 +89,10 @@ const NewCard = ({ item }) => {
                 onClick={() => dispatch(contactRemoved(item.id))}
               ></FontAwesomeIcon>
             </Link>
-          </div>
+          </div> */}
         </div>
       ) : null}
+      </Card.Body>
     </Card>
   );
 };

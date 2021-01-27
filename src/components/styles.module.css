@@ -1,19 +1,44 @@
 .cardTitle {
   font-size: 25px !important;
   color: #fff;
+  margin-bottom: 0 !important;
 }
 .cardBody {
-  position: relative;
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 380px;
+  width: 300px;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 6px 6px 12ps #b58e23,
+              -6px -6px 12px #fffc3f;
+  background: #fbc531;
 }
 .infoIcon {
   position: absolute;
   right: 5px;
   top: 5px;
 }
+.img {
+  width: 300px;
+  height: 380px;
+  overflow: hidden;
+}
+
+.img img {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.cardBody:hover .img {
+  height: 50%;
+}
 
 .mainCard {
-  width: 16rem;
-  background-color: #6699CC !important;
+  margin: 0;
+  padding: 0;
+  border: none !important;
 }
 
 .listGroup {
