@@ -3,7 +3,6 @@ import { Card, ListGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 import { contactRemoved } from "../store/contacts";
-import people1 from './images/people-1a.jpg'
 import { useDispatch } from "react-redux";
 import {
   faTrash,
@@ -11,35 +10,63 @@ import {
   faInfoCircle,
   faEnvelope,
   faMobile,
+  faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  faTwitter,
-  faFacebook,
-  faLinkedin,
-  faInstagram
-} from "@fortawesome/free-brands-svg-icons"
+// import {
+//   faTwitter,
+//   faFacebook,
+//   faLinkedin,
+//   faInstagram,
+// } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NewCard = ({ item }) => {
-  const [showListGroup, setShowListGroup] = useState(false);
-
   const dispatch = useDispatch();
 
+  // const handleIconHover = (e) => {
+  //   setShowDetail(true);
+  //   if (e.target.getAttribute("data-icon") === "envelope") {
+  //     setIconHover(item.email);
+  //   } else if (e.target.getAttribute("data-icon") === "mobile") {
+  //     setIconHover(item.phone);
+  //   }
+  //   console.log(e.target.getAttribute("data-icon") === "envelope")
+  // };
+
+  // const handleIconNoHover = () => {
+  //   setShowDetail(false)
+  // }
+
   return (
-    <Card
-      // onMouseEnter={() => setShowListGroup(true)}
-      // onMouseLeave={() => setShowListGroup(false)}
-      key={item.id}
-      className={Styles.mainCard}
-    >
-      <Card.Body className={Styles.cardBody}>
-        <div className={Styles.img}>
-          <img src={people1} alt="" />
-        </div>
-        <Card.Title className={`${Styles.cardTitle} font-italic`}>
+    <Card key={item.id} className={Styles.card}>
+      <Card.Body className={`${Styles.profile}`}>
+        <FontAwesomeIcon className="fa-3x mb-3" icon={faUserTie}></FontAwesomeIcon>
+        <div className="h5">
           {item.firstName} {item.lastName}
-        </Card.Title>
-        {/* <OverlayTrigger
+        </div>
+        <p>{item.jobTitle}</p>
+        <Link
+          to={{
+            pathname: `/update/${item.id}`,
+            state: { item },
+          }}
+        >
+          <FontAwesomeIcon className={`${Styles.edit} fa-lg`} icon={faEdit}></FontAwesomeIcon>
+        </Link>
+      </Card.Body>
+      <Card.Body className={Styles.profileDetail}>
+        <div className={`${Styles.details} h2`}>Details</div>
+      </Card.Body>
+
+      {/* <Card.Title>
+              {item.firstName} {item.lastName}
+            </Card.Title>
+            <div>
+              {item.email}
+              {item.phone}
+            </div> */}
+
+      {/* <OverlayTrigger
         key={'top'}
         placement={'top'}
         overlay={
@@ -53,16 +80,12 @@ const NewCard = ({ item }) => {
             icon={faInfoCircle}
           ></FontAwesomeIcon>
         </OverlayTrigger> */}
-      
-      {showListGroup ? (
-        <div className={Styles.socials}>
-          <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon>
-          <FontAwesomeIcon icon={faMobile}></FontAwesomeIcon>
-          <FontAwesomeIcon icon={faTwitter}></FontAwesomeIcon>
+
+      {/* <FontAwesomeIcon icon={faTwitter}></FontAwesomeIcon>
           <FontAwesomeIcon icon={faFacebook}></FontAwesomeIcon>
           <FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon>
-          <FontAwesomeIcon icon={faInstagram}></FontAwesomeIcon>
-          {/* <ListGroup>
+          <FontAwesomeIcon icon={faInstagram}></FontAwesomeIcon> */}
+      {/* <ListGroup>
             <ListGroup.Item className={Styles.listGroup}>
               {item.email}
             </ListGroup.Item>
@@ -70,7 +93,7 @@ const NewCard = ({ item }) => {
               {item.phone}
             </ListGroup.Item>
           </ListGroup> */}
-          {/* <div className={Styles.alignIcons}>
+      {/* <div className={Styles.alignIcons}>
             <Link
               to={{
                 pathname: `/update/${item.id}`,
@@ -90,9 +113,6 @@ const NewCard = ({ item }) => {
               ></FontAwesomeIcon>
             </Link>
           </div> */}
-        </div>
-      ) : null}
-      </Card.Body>
     </Card>
   );
 };

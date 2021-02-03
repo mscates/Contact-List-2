@@ -10,6 +10,7 @@ const useForm = (props) => {
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
+    jobTitle: "",
     phone: "",
     email: "",
   });

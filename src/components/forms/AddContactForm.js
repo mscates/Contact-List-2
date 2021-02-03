@@ -5,7 +5,7 @@ import useForm from "../../useForm";
 
 const AddContactForm = () => {
   const { handleChange, values, handleSubmit, errors } = useForm();
-  const {firstName, lastName, phone, email} = errors
+  const {firstName, lastName, jobTitle, phone, email} = errors
 
   const errorInputBorder = (name) => {
     return name ? 'border-danger' : null
@@ -43,7 +43,20 @@ const AddContactForm = () => {
                 onChange={handleChange}
               />
             </Form.Group>
-            {lastName && <p className="text-danger">{lastName}</p>}
+            {jobTitle && <p className="text-danger">{jobTitle}</p>}
+
+            <Form.Group controlId="jobTitle">
+              <Form.Label>Job Title</Form.Label>
+              <Form.Control
+              className={errorInputBorder(jobTitle)}
+                type="text"
+                name="jobTitle"
+                value={values.jobTitle}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            {jobTitle && <p className="text-danger">{jobTitle}</p>}
+
             <Form.Group controlId="email">
               <Form.Label>Email</Form.Label>
 
@@ -54,6 +67,7 @@ const AddContactForm = () => {
                 value={values.email}
                 onChange={handleChange}
               />
+
             </Form.Group>
             {errors.email && <p className="text-danger">{errors.email}</p>}
             <Form.Group controlId="phone">

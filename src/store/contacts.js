@@ -4,12 +4,20 @@ let lastId = 0;
 
 const slice = createSlice({
   name: "contacts",
-  initialState: [],
+  initialState: [{
+    firstName: 'John',
+    lastName: 'Doe',
+    jobTitle: 'Designer',
+    email: 'jdoe@gmail.com',
+    phone: '555-555-5555',
+    id: 0
+  }],
   reducers: {
     contactAdded: (contacts, action) => {
       contacts.push({
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
+        jobTitle: action.payload.jobTitle,
         email: action.payload.email,
         phone: action.payload.phone,
         id: ++lastId,
@@ -26,6 +34,7 @@ const slice = createSlice({
       contacts[index] = {
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
+        jobTitle: action.payload.jobTitle,
         email: action.payload.email,
         phone: action.payload.phone,
         id: action.payload.id,
