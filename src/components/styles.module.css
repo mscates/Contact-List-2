@@ -1,36 +1,75 @@
 .card {
-  display: flex;
   flex-direction: row !important;
   max-width: 500px;
   width: 100%;
-  border: 1px solid green;
+  margin-bottom: 50px;
+}
+@media (max-width: 600px) {
+  .card {
+    flex-direction: column !important;
+    max-width: 300px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
+}
+
+.addContact {
+  background-color: #cd5700 !important;
+  border: none !important;
+  transition: all .4s;
+}
+.addContact:hover {
+  background-color: #ff7518 !important;
+}
+
+.main {
+  background-color: #cdcdcd;
+  height: 100vh;
+}
+.mainContacts {
+  display: flex;
+  justify-content: flex-start;
+}
+.title {
+  color: #1e3d59;
 }
 
 .profile {
   flex: 0 1 150px !important;
-  border: 1px solid red;
   text-align: center;
-  background-color: #398AD7;
+  background-color: #1e3d59;
   color: #fff;
 }
 .profileDetail {
   flex: 0 1 350px !important;
-  border: 1px solid blue;
   text-align: center;
+  background-color: #f5f0e1;
+}
+@media (max-width: 600px) {
+  .profile {
+    flex: 0 1 200px !important;
+  }
+  .profileDetail {
+    flex: 0 1 200px !important;
+  }
+  .mainContacts {
+    justify-content: center;
+  }
 }
 .details {
   letter-spacing: 1px;
   display: inline-block;
+  
 }
 .details::after {
   content: '';
-  background: black;
+  background: #ff6e40;
   width: 100%;
   height: 2px;
   display: block;
 }
 .row {
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .edit {
@@ -40,3 +79,25 @@
 .edit:hover {
   color: #ff7518;
 }
+.socials {
+  display: flex;
+  justify-content: space-around;
+  
+}
+.twitter, .facebook, .linkedin, .instagram  {
+  transition: all 0.4s;
+}
+.twitter:hover {
+  color: #1DA1F2;
+}
+.facebook:hover {
+  color: #4267B2;
+}
+.linkedin:hover {
+  color: #2867B2;
+}
+
+.instagram:hover {
+  color: red;
+}
+

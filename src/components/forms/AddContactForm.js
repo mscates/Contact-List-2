@@ -1,87 +1,68 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import useForm from "../../useForm";
+import useForm from '../../useForm'
+import AddContactInput from "../AddContactInput";
+import AddContactError from "../AddContactError";
 
 const AddContactForm = () => {
-  const { handleChange, values, handleSubmit, errors } = useForm();
-  const {firstName, lastName, jobTitle, phone, email} = errors
-
-  const errorInputBorder = (name) => {
-    return name ? 'border-danger' : null
-  }
-  
+  const { handleSubmit, errors, values, handleChange } = useForm();
   return (
     <Container>
       <Row className="justify-content-center mt-4">
         <Col xs={10}>
           <Form noValidate>
-            <Form.Group controlId="firstName">
-              <Form.Label>First Name</Form.Label>
+            <AddContactInput
+              className={errors.firstName && "border-danger"}
+              type="text"
+              value={values.firstName}
+              labelName="First Name"
+              name="firstName"
+              errors={errors}
+              handleChange={handleChange}
+            />
+            <AddContactError name={errors.firstName} />
+
+            <AddContactInput
+            className={errors.lastName && "border-danger"}
+            type="text"
+            value={values.lastName}
+            labelName="Last Name"
+            name="lastName"
+            errors={errors}
+              handleChange={handleChange}
+            />
+            <AddContactError name={errors.lastName} />
+
+            <AddContactInput
+              type="text"
+              value={values.jobTitle}
+              labelName="Job Title"
+              name="jobTitle"
+              errors={errors}
+              handleChange={handleChange}
+            />
+            <AddContactError name={errors.jobTitle} />
+
+            <AddContactInput type="text"
+              value={values.email}
+              labelName="Email"
+              name="email" 
+              errors={errors}
+              handleChange={handleChange}
+              />
               
-              <Form.Control
-              className={errorInputBorder(firstName)}
-                type="text"
-                name="firstName"
-                value={values.firstName}
-                onChange={handleChange}
+            <AddContactError name={errors.email} />
+
+            <AddContactInput type="text"
+              value={values.phone}
+              labelName="Phone"
+              name="phone" 
+              errors={errors}
+              handleChange={handleChange}
               />
-            </Form.Group>
-            {firstName && (
-              <p className="text-danger">
-                {firstName}
-              </p>
-            )}
+            <AddContactError name={errors.phone} />
 
-            <Form.Group controlId="lastName">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-              className={errorInputBorder(lastName)}
-                type="text"
-                name="lastName"
-                value={values.lastName}
-                onChange={handleChange}
-              />
-            </Form.Group>
-            {jobTitle && <p className="text-danger">{jobTitle}</p>}
-
-            <Form.Group controlId="jobTitle">
-              <Form.Label>Job Title</Form.Label>
-              <Form.Control
-              className={errorInputBorder(jobTitle)}
-                type="text"
-                name="jobTitle"
-                value={values.jobTitle}
-                onChange={handleChange}
-              />
-            </Form.Group>
-            {jobTitle && <p className="text-danger">{jobTitle}</p>}
-
-            <Form.Group controlId="email">
-              <Form.Label>Email</Form.Label>
-
-              <Form.Control
-              className={errorInputBorder(email)}
-                type="text"
-                name="email"
-                value={values.email}
-                onChange={handleChange}
-              />
-
-            </Form.Group>
-            {errors.email && <p className="text-danger">{errors.email}</p>}
-            <Form.Group controlId="phone">
-              <Form.Label>Phone</Form.Label>
-
-              <Form.Control
-              className={errorInputBorder(phone)}
-                type="tel"
-                name="phone"
-                value={values.phone}
-                onChange={handleChange}
-              />
-            </Form.Group>
-            {errors.phone && <p className="text-danger">{errors.phone}</p>}
             <Button>
               <Link to="/" onClick={handleSubmit}>
                 Submit

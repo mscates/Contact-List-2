@@ -12,12 +12,12 @@ import {
   faMobile,
   faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
-// import {
-//   faTwitter,
-//   faFacebook,
-//   faLinkedin,
-//   faInstagram,
-// } from "@fortawesome/free-brands-svg-icons";
+import {
+  faTwitter,
+  faFacebook,
+  faLinkedin,
+  faInstagram,
+} from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NewCard = ({ item }) => {
@@ -38,9 +38,12 @@ const NewCard = ({ item }) => {
   // }
 
   return (
-    <Card key={item.id} className={Styles.card}>
+    <Card key={item.id} className={`${Styles.card} d-flex`}>
       <Card.Body className={`${Styles.profile}`}>
-        <FontAwesomeIcon className="fa-3x mb-3" icon={faUserTie}></FontAwesomeIcon>
+        <FontAwesomeIcon
+          className="fa-3x mb-3"
+          icon={faUserTie}
+        ></FontAwesomeIcon>
         <div className="h5">
           {item.firstName} {item.lastName}
         </div>
@@ -51,48 +54,30 @@ const NewCard = ({ item }) => {
             state: { item },
           }}
         >
-          <FontAwesomeIcon className={`${Styles.edit} fa-lg`} icon={faEdit}></FontAwesomeIcon>
+          <FontAwesomeIcon
+            className={`${Styles.edit} fa-lg`}
+            icon={faEdit}
+          ></FontAwesomeIcon>
         </Link>
       </Card.Body>
       <Card.Body className={Styles.profileDetail}>
         <div className={`${Styles.details} h2`}>Details</div>
+        <div className={Styles.mainContacts}>
+          Email: <span className="ml-3">{item.email}</span>
+        </div>
+        <div className={Styles.mainContacts}>Mobile: {item.phone}</div>
+        <div className={`${Styles.socials} mt-4`}>
+          <FontAwesomeIcon className={`${Styles.twitter} fa-lg`} icon={faTwitter}></FontAwesomeIcon>
+          <FontAwesomeIcon className={`${Styles.facebook} fa-lg`} icon={faFacebook}></FontAwesomeIcon>
+          <FontAwesomeIcon className={`${Styles.linkedin} fa-lg`} icon={faLinkedin}></FontAwesomeIcon>
+          <FontAwesomeIcon className={`${Styles.instagram} fa-lg`} icon={faInstagram}></FontAwesomeIcon>
+        </div>
       </Card.Body>
 
-      {/* <Card.Title>
-              {item.firstName} {item.lastName}
-            </Card.Title>
-            <div>
-              {item.email}
-              {item.phone}
-            </div> */}
+     
+       
 
-      {/* <OverlayTrigger
-        key={'top'}
-        placement={'top'}
-        overlay={
-          <Tooltip id={`tooltip-top`}>
-            Click for More Info
-          </Tooltip>
-        }
-        >
-          <FontAwesomeIcon
-            className={Styles.infoIcon}
-            icon={faInfoCircle}
-          ></FontAwesomeIcon>
-        </OverlayTrigger> */}
-
-      {/* <FontAwesomeIcon icon={faTwitter}></FontAwesomeIcon>
-          <FontAwesomeIcon icon={faFacebook}></FontAwesomeIcon>
-          <FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon>
-          <FontAwesomeIcon icon={faInstagram}></FontAwesomeIcon> */}
-      {/* <ListGroup>
-            <ListGroup.Item className={Styles.listGroup}>
-              {item.email}
-            </ListGroup.Item>
-            <ListGroup.Item className={Styles.listGroup}>
-              {item.phone}
-            </ListGroup.Item>
-          </ListGroup> */}
+      
       {/* <div className={Styles.alignIcons}>
             <Link
               to={{

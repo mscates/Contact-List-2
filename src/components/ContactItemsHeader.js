@@ -4,7 +4,8 @@ import { Container, Row } from "react-bootstrap";
 
 const ContactItemsHeader = () => {
   return (
-    
+    <Container fluid>
+      <Row>
         <Cards />
       </Row>
     </Container>

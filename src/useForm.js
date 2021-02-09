@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import validateValues from "./validateValues";
 
-const useForm = (props) => {
+const useForm = () => {
   let history = useHistory();
   const dispatch = useDispatch();
   const [values, setValues] = useState({
@@ -19,6 +19,7 @@ const useForm = (props) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value)
     setValues({
       ...values,
       [name]: value,
@@ -30,6 +31,11 @@ const useForm = (props) => {
     setErrors(validateValues(values));
     setIsSubmitting(true);
   };
+
+  // useEffect(() => {
+  //   console.log('Value updated')
+  //   console.log(values)
+  // }, [values])
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {

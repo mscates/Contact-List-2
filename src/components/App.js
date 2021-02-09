@@ -4,11 +4,12 @@ import UpdateContactForm from "../components/forms/UpdateContactForm";
 import Home from "./Home";
 import Header from "./Header";
 import AddContactForm from "../components/forms/AddContactForm";
+import Styles from "./styles.module.css";
 // import image from "./images/background2.jpg";
 
 const App = () => {
   return (
-    <div
+    <div className={Styles.main}
       // style={{
       //   backgroundImage: `url(${image})`,
       //   backgroundSize: "cover",
