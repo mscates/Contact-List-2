@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { contactAdded } from "./store/contacts";
+import { contactAdded } from "../../store/contacts";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import validateValues from "./validateValues";

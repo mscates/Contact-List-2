@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Card, ListGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
-import Styles from "./styles.module.css";
+import Styles from "../../components/styles.module.css";
 import { Link } from "react-router-dom";
-import { contactRemoved } from "../store/contacts";
+import { contactRemoved } from "../../store/contacts";
 import { useDispatch } from "react-redux";
 import {
   faTrash,
@@ -67,17 +67,32 @@ const NewCard = ({ item }) => {
         </div>
         <div className={Styles.mainContacts}>Mobile: {item.phone}</div>
         <div className={`${Styles.socials} mt-4`}>
-          <FontAwesomeIcon className={`${Styles.twitter} fa-lg`} icon={faTwitter}></FontAwesomeIcon>
-          <FontAwesomeIcon className={`${Styles.facebook} fa-lg`} icon={faFacebook}></FontAwesomeIcon>
-          <FontAwesomeIcon className={`${Styles.linkedin} fa-lg`} icon={faLinkedin}></FontAwesomeIcon>
-          <FontAwesomeIcon className={`${Styles.instagram} fa-lg`} icon={faInstagram}></FontAwesomeIcon>
+          <FontAwesomeIcon
+            className={`${Styles.twitter} fa-lg`}
+            icon={faTwitter}
+          ></FontAwesomeIcon>
+          <FontAwesomeIcon
+            className={`${Styles.facebook} fa-lg`}
+            icon={faFacebook}
+          ></FontAwesomeIcon>
+          <FontAwesomeIcon
+            className={`${Styles.linkedin} fa-lg`}
+            icon={faLinkedin}
+          ></FontAwesomeIcon>
+          <FontAwesomeIcon
+            className={`${Styles.instagram} fa-lg`}
+            icon={faInstagram}
+          ></FontAwesomeIcon>
         </div>
+        <Link to="/">
+          <FontAwesomeIcon
+            className={(Styles.icon, Styles.iconDelete)}
+            icon={faTrash}
+            onClick={() => dispatch(contactRemoved(item.id))}
+          ></FontAwesomeIcon>
+        </Link>
       </Card.Body>
 
-     
-       
-
-      
       {/* <div className={Styles.alignIcons}>
             <Link
               to={{

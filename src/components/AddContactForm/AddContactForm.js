@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import useForm from '../../useForm'
-import AddContactInput from "../AddContactInput";
-import AddContactError from "../AddContactError";
+import useForm from '../FormHelpers/useForm'
+import AddContactInput from "../AddContactInput/AddContactInput";
+import AddContactError from "../AddContactError/AddContactError";
 
 const AddContactForm = () => {
   const { handleSubmit, errors, values, handleChange } = useForm();

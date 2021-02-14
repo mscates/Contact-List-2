@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from 'react-router-dom'
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap'
-import useUpdateForm from "../../useUpdateForm";
+import useUpdateForm from "../FormHelpers/useUpdateForm";
 
 const UpdateContactForm = (props) => {
   const { handleChange, updateValues, handleSubmit, errors } = useUpdateForm(props.location.state.item);

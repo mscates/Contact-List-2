@@ -101,3 +101,14 @@
   color: red;
 }
 
+.iconDelete {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  color: #000;
+  transition: all .4s
+}
+.iconDelete:hover {
+  color: red;
+}
+

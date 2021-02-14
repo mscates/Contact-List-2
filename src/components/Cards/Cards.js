@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Container, Row } from "react-bootstrap";
-import NewCard from "./NewCard";
-import Styles from "./styles.module.css";
+import NewCard from "../NewCard/NewCard";
+import Styles from "../../components/styles.module.css";
 
 const Cards = () => {
   const data = useSelector((state) => state);

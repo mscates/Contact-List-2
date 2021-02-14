@@ -1,8 +1,8 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-import Header from './components/Header'
-import { MemoryRouter } from 'react-router-dom'
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17'
+import Header from './components/Header/Header'
+import { MemoryRouter, Link, Button} from 'react-router-dom'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -11,11 +11,14 @@ Enzyme.configure({ adapter: new Adapter() })
 describe('Header', () => {
   it('should show text', () => {
     const wrapper = shallow(<Header />)
-    const text = wrapper.find('h1')
-    expect(text.text()).toBe('Basic Contact List')
+    const h1 = wrapper.find('h1')
+    const result = h1.text()
+    expect(result).toBe('Basic Contact List')
   })
   it('should show add contact form when button is clicked', () => {
-    const wrapper = shallow(<MemoryRouter><Header /></MemoryRouter>)
-    expect(wrapper.find('Link').prop('to')).toBe.equal('/add')
+    const wrapper = shallow(<Header />).dive()
+    const result = wrapper.find(Link)
+    expect(result.props().to).toBe('/add')
+
   })
 })
